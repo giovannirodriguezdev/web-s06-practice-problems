@@ -42,12 +42,12 @@
       go: "Golang",
     }
     function App() {
-      let selection = '' // 👈 PROBLEM 1
+      const [selection, setSelection] = useState(""); // 👈 PROBLEM 1
       const onSelect = event => {
-        console.log('💥 a change happened...!') // 👈 PROBLEM 2
+        setSelection(event.target.value); // 👈 PROBLEM 2
       }
       const onReset = () => {
-        console.log('💥 a click happened...!') // 👈 PROBLEM 2
+        setSelection(""); // 👈 PROBLEM 2
       }
       return (
         <section>
@@ -59,9 +59,12 @@
             <option value="java">Java</option>
             <option value="go">Golang</option>
           </select>
-          <h4 id="info">{
-            'No selection made' // 👈 PROBLEM 3
-          }</h4>
+          <h4 id="info">
+            {selection === "" && "No selection made"}
+            {selection === "java" && "You selected Java."}
+            {selection === "go" && "You selected Golang."}
+            {selection === "js" && "You selected JavaScript. WELL DONE!"}
+          </h4>
           <button onClick={onReset}>Reset</button>
         </section>
       )

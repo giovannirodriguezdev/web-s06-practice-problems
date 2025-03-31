@@ -25,6 +25,7 @@
     ** ✅ THIS PROBLEM IS DONE FOR YOU AS AN EXAMPLE ✅ **
     - [A] Inside <App />, take the `mainSiteHeading` from the `data` state and pass it into <Heading /> via a prop called `text`.
     - [B] Then, inside <Heading />, use this `text` prop to render the text content of the <h1> element.
+    
 
     PROBLEM 1 - <Footer />
     - [A] Inside <App />, take the `footerNote` from the `data` state and pass it into <Footer /> via a prop called `note`.
@@ -59,40 +60,43 @@
           <Heading text={data.mainSiteHeading} /> {/* ✅ Problem 0 [A] passing data via a `text` prop */}
           <section>
             <h2>What do you want to do?</h2>
-            <Button /> {/* 👈 PROBLEM 2 */}
-            <Button /> {/* 👈 PROBLEM 2 */}
-            <Button /> {/* 👈 PROBLEM 2 */}
+            <Button color={data.colors[0]} label={data.btnLabels.js} /> {/* 👈 PROBLEM 2 */}
+            <Button color={data.colors[1]} label={data.btnLabels.java} /> {/* 👈 PROBLEM 2 */}
+            <Button color={data.colors[2]} label={data.btnLabels.py} /> {/* 👈 PROBLEM 2 */}
           </section>
           <section>
             <h2>Salute these wonderful learners:</h2>
             <ul>
-              <li><Learner /></li> {/* 👈 PROBLEM 3 */}
-              <li><Learner /></li> {/* 👈 PROBLEM 3 */}
+              <li><Learner fname={data.learners[0].fname} lname={data.learners[0].lname}/></li> {/* 👈 PROBLEM 3 */}
+              <li><Learner fname={data.learners[1].fname} lname={data.learners[1].lname} /></li> {/* 👈 PROBLEM 3 */}
             </ul>
           </section>
-          <Footer /> {/* 👈 PROBLEM 1 */}
+          <Footer footer={data.footerNote}/> {/* 👈 PROBLEM 1 */}
         </>
       )
     }
     function Heading({ text }) { // ✅ Problem 0 [B] takes a `text` prop containing "Passing Data Using Props"
-      console.log('the data in `text` -->', text) // ✅ Verifies that the prop contains the expected information
+      console.log('the data in `text` -->', {text}) // ✅ Verifies that the prop contains the expected information
       return (
         <h1>{text}</h1> // ✅ Problem 0 [B] uses the string inside `text` to fill the <h1> with text
       )
     }
-    function Footer() { // 👈 PROBLEM 1 👇
+    function Footer( { footer }) { // 👈 PROBLEM 1 👇
+      console.log(`the data in "footer" -->`, {footer});
       return (
-        <footer>Hard-coded footer note {new Date().getFullYear()}</footer>
+        <footer>{footer}</footer>
       )
     }
-    function Button() { // 👈 PROBLEM 2 👇
+    function Button({ color, label }) { // 👈 PROBLEM 2 👇
       return (
-        <button style={{ color: 'white' }}>Learn stuff</button>
+        <button style={{ backgroundColor: color, color: 'white' }}>{label}</button>
       )
     }
-    function Learner() { // 👈 PROBLEM 3 👇
+    function Learner({ fname, lname }) { // 👈 PROBLEM 3 👇
       return (
-        <div><p>Doe, Jane</p></div>
+        <div>
+          <p>{lname}, {fname}</p>
+        </div>
       )
     }
     ReactDOM.createRoot(document.getElementById('root')).render(<App />)
